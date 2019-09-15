@@ -2,6 +2,7 @@ package utils
 
 import (
 	"encoding/json"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"strconv"
@@ -38,4 +39,22 @@ func GetConnection() *gorm.DB {
 func GetID(r *http.Request) (id int, err error) {
 	vars := mux.Vars(r)
 	return strconv.Atoi(vars["id"])
+}
+
+// GetStruct JSONリクエストを構造体にパースする。エラーの場合はレスポンスするメッセージを返す。
+func GetStruct(r *http.Request, i interface{}) string {
+
+	// リクエストボディ取得
+	body, err := ioutil.ReadAll(r.Body)
+	defer r.Body.Close()
+	if err != nil {
+		return "Invalid request"
+	}
+
+	// 読み込んだJSONを構造体に変換
+	if err := json.Unmarshal(body, i); err != nil {
+		return "JSON Unmarshaling failed ."
+	}
+
+	return ""
 }

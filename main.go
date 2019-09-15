@@ -1,9 +1,7 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net/http"
 
@@ -42,7 +40,7 @@ func findAllUsers(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 
 	var userList []User
-	db.Table("users").Find(&userList)
+	db.Find(&userList)
 
 	// 共通化した処理を使う
 	utils.RespondWithJSON(w, http.StatusOK, userList)
@@ -60,25 +58,18 @@ func findByID(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 
 	var user User
-	db.Table("users").Where("id = ?", id).Find(&user)
+	db.Where("id = ?", id).Find(&user)
 
 	// 共通化した処理を使う
 	utils.RespondWithJSON(w, http.StatusOK, user)
 }
 
 func createUser(w http.ResponseWriter, r *http.Request) {
-	// リクエストボディ取得
-	body, err := ioutil.ReadAll(r.Body)
-	defer r.Body.Close()
-	if err != nil {
-		utils.RespondWithError(w, http.StatusBadRequest, "Invalid request")
-		return
-	}
-
+	// 共通処理で構造体を取得する
 	var user User
-	// 読み込んだJSONを構造体に変換
-	if err := json.Unmarshal(body, &user); err != nil {
-		utils.RespondWithError(w, http.StatusBadRequest, "JSON Unmarshaling failed .")
+	msg := utils.GetStruct(r, &user)
+	if msg != "" {
+		utils.RespondWithError(w, http.StatusBadRequest, msg)
 		return
 	}
 
@@ -87,27 +78,18 @@ func createUser(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 
 	// DBにINSERTする
-	db.Table("users").Create(&user)
+	db.Create(&user)
 
 	utils.RespondWithJSON(w, http.StatusOK, user)
 
 }
 
 func updateUser(w http.ResponseWriter, r *http.Request) {
-	// リクエストボディ取得
-	body, err := ioutil.ReadAll(r.Body)
-	defer r.Body.Close()
-	if err != nil {
-		utils.RespondWithError(w, http.StatusBadRequest, "Invalid request")
-		return
-	}
-
-	// 読み込んだJSONを構造体に変換
+	// 共通処理で構造体を取得する
 	var user User
-	if err := json.Unmarshal(body, &user); err != nil {
-		log.Println(body)
-		log.Println(err)
-		utils.RespondWithError(w, http.StatusBadRequest, "JSON Unmarshaling failed .")
+	msg := utils.GetStruct(r, &user)
+	if msg != "" {
+		utils.RespondWithError(w, http.StatusBadRequest, msg)
 		return
 	}
 
@@ -116,27 +98,18 @@ func updateUser(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 
 	// Update実行
-	db.Table("users").Save(&user)
+	db.Save(&user)
 	// gormはSaveメソッドで主キーの部分をUpdateしてくれる。また、存在しないキーだったらINSERTされる
 
 	utils.RespondWithJSON(w, http.StatusOK, user)
 }
 
 func deleteUser(w http.ResponseWriter, r *http.Request) {
-	// リクエストボディ取得
-	body, err := ioutil.ReadAll(r.Body)
-	defer r.Body.Close()
-	if err != nil {
-		utils.RespondWithError(w, http.StatusBadRequest, "Invalid request")
-		return
-	}
-
-	// 読み込んだJSONを構造体に変換
+	// 共通処理で構造体を取得する
 	var user User
-	if err := json.Unmarshal(body, &user); err != nil {
-		log.Println(body)
-		log.Println(err)
-		utils.RespondWithError(w, http.StatusBadRequest, "JSON Unmarshaling failed .")
+	msg := utils.GetStruct(r, &user)
+	if msg != "" {
+		utils.RespondWithError(w, http.StatusBadRequest, msg)
 		return
 	}
 
@@ -150,7 +123,7 @@ func deleteUser(w http.ResponseWriter, r *http.Request) {
 	db := utils.GetConnection()
 	defer db.Close()
 
-	db.Table("users").Delete(&user)
+	db.Delete(&user)
 
 	utils.RespondWithJSON(w, http.StatusOK, user)
 }
