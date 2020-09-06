@@ -1,0 +1,5 @@
+build/docker/**/*.dockerfile
+build/env/*.env
+mysql/log/*.log
+mysql/dump.sql
+README.md
