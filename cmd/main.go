@@ -5,13 +5,13 @@ import (
 	"log"
 	"net/http"
 
-	"./utils"
+	"go-rest-sample/internal/utils"
 
 	"github.com/gorilla/mux"
-	_ "github.com/jinzhu/gorm/dialects/mysql"
+	_ "gorm.io/driver/mysql"
 )
 
-// User User構造体
+// User構造体
 type User struct {
 	ID        int
 	FirstName string
@@ -25,9 +25,8 @@ func main() {
 	router.HandleFunc("/users/{id}", findByID).Methods("GET")
 	router.HandleFunc("/users", createUser).Methods("POST")
 	router.HandleFunc("/users", updateUser).Methods("PUT")
-	// 追加部分 DELETEで受ける
 	router.HandleFunc("/users", deleteUser).Methods("DELETE")
-	log.Fatal(http.ListenAndServe(":8080", router))
+	log.Fatal(http.ListenAndServe(":9999", router))
 }
 
 func home(w http.ResponseWriter, r *http.Request) {
