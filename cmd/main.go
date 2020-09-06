@@ -8,7 +8,8 @@ import (
 	"go-rest-sample/internal/utils"
 
 	"github.com/gorilla/mux"
-	_ "gorm.io/driver/mysql"
+	// _ "gorm.io/driver/mysql"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
 // User構造体

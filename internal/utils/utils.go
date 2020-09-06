@@ -8,7 +8,8 @@ import (
 	"strconv"
 
 	"github.com/gorilla/mux"
-	"gorm.io/gorm"
+	"github.com/jinzhu/gorm"
+	// "gorm.io/gorm"
 )
 
 // RespondWithError エラー情報をJSONで返す
@@ -26,7 +27,7 @@ func RespondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
 
 // GetConnection DBとのコネクションを張る
 func GetConnection() *gorm.DB {
-	db, err := gorm.Open("mysql", "mysql_user:mysql_pw@tcp(mysql:3306)/restapi_db?charset=utf8&parseTime=True&loc=Local")
+	db, err := gorm.Open("mysql", "mysql_user:mysql_pw@tcp(db:3306)/restapi_db?charset=utf8&parseTime=True&loc=Local")
 	if err != nil {
 		log.Fatalf("DB connection failed %v", err)
 	}
