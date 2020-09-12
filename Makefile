@@ -1,5 +1,5 @@
-up-all:
+dev-up-all:
 	docker-compose up --build -d
 
-down-all:
+dev-down-all:
 	docker-compose down --rmi all -v

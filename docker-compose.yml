@@ -4,7 +4,7 @@ services:
   restapi:
     build:
       context: .
-      dockerfile: build/docker/restapi.dockerfile
+      dockerfile: build/docker/dev/restapi.dockerfile
     env_file: ./build/env/restapi.env
     image: restapi-img
     container_name: restapi-cont
@@ -14,21 +14,21 @@ services:
     tty: true
     volumes:
       - .:/restapi
-      - ./db/dump:/var/dump
+      - ./db/mariadb/dump:/var/dump
 
-  db:
+  mariadb:
     build:
       context: .
-      dockerfile: build/docker/db.dockerfile
-    env_file: ./build/env/db.env
-    image: db-img
-    container_name: db-cont
+      dockerfile: build/docker/dev/mariadb.dockerfile
+    env_file: ./build/env/mariadb.env
+    image: mariadb-img
+    container_name: mariadb-cont
     ports:
       - 3306:3306
     volumes:
-      - restapi-db-vol:/var/lib/mysql
-      - ./db/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
-      - ./db/log:/var/log
+      - mariadb-vol:/var/lib/mysql
+      - ./db/mariadb/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./db/mariadb/log:/var/log
 
 volumes:
-  restapi-db-vol:
+  mariadb-vol:
