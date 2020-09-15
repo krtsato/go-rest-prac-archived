@@ -26,7 +26,7 @@ services:
       - 3306:3306
     volumes:
       - mariadb-vol:/var/lib/mysql
-      - ./db/mariadb/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./config/my.cnf:/etc/mysql/conf.d/my.cnf
       - ./db/mariadb/log:/var/log
 
 volumes:

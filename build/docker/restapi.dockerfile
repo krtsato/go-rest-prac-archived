@@ -4,6 +4,8 @@ WORKDIR /restapi
 
 COPY ./ ./
 
+ENV CGO_ENABLED=0
+
 RUN set -ox pipefail \
   && apk update \
   && apk add --no-cache build-base mariadb-client mariadb-dev \
