@@ -10,7 +10,7 @@ services:
     container_name: restapi-cont
     ports:
       - 9999:9999
-    command: air
+    command: air # CMD を上書き
     volumes:
       - .:/restapi
       - ./db/mariadb/dump:/var/dump

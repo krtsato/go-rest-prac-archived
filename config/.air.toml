@@ -3,21 +3,21 @@
 # Working directory
 # . or absolute path, please note that the directories following must be under root.
 root = "."
-tmp_dir = "tmp"
+tmp_dir = "build/tmp"
 
 [build]
 # Just plain old shell command. You could use `make` as well.
-cmd = "go build -o ./tmp/main ./cmd/restapi/main.go"
+cmd = "go build -o ./build/tmp/restapi ./cmd/restapi/main.go"
 # Binary file yields from `cmd`.
-bin = "tmp/main"
+bin = "build/tmp/restapi"
 # Customize binary.
-full_bin = "APP_ENV=dev APP_USER=air ./tmp/main"
+full_bin = "APP_ENV=dev APP_USER=air ./build/tmp/main"
 # Watch these filename extensions.
-include_ext = ["go", "tpl", "tmpl", "html"]
+include_ext = ["go"]
 # Ignore these filename extensions or directories.
-exclude_dir = ["assets", "tmp", "vendor", "frontend/node_modules"]
+exclude_dir = [build", "db", "scripts"]
 # Watch these directories if you specified.
-include_dir = []
+include_dir = ["cmd", "internal", "pkg"]
 # Exclude files.
 exclude_file = []
 # It's not necessary to trigger build each time file changes if it's too frequent.

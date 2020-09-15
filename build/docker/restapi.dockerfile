@@ -1,6 +1,6 @@
 FROM golang:1.15.1-alpine3.12 AS build
 
-WORKDIR /restapi
+WORKDIR /go-rest-sample
 
 COPY ./ ./
 
