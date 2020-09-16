@@ -4,13 +4,14 @@ services:
   restapi:
     build:
       context: .
-      dockerfile: build/docker/dev/restapi.dockerfile
+      dockerfile: build/docker/restapi.dockerfile
+      target: build
     env_file: ./build/env/restapi.env
-    image: restapi-img
-    container_name: restapi-cont
+    image: restapi_img
+    container_name: restapi_cont
     ports:
       - 9999:9999
-    command: air # CMD を上書き
+    command: air
     volumes:
       - .:/restapi
       - ./db/mariadb/dump:/var/dump
@@ -18,15 +19,16 @@ services:
   mariadb:
     build:
       context: .
-      dockerfile: build/docker/dev/mariadb.dockerfile
+      dockerfile: build/docker/mariadb.dockerfile
     env_file: ./build/env/mariadb.env
-    image: mariadb-img
-    container_name: mariadb-cont
+    image: mariadb_img
+    container_name: mariadb_cont
     ports:
       - 3306:3306
     volumes:
       - mariadb-vol:/var/lib/mysql
       - ./config/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./db/mariadb/initdb.d:/docker-entrypoint-initdb.d
       - ./db/mariadb/log:/var/log
 
 volumes:

@@ -1,5 +1,8 @@
-build/docker/**/*.dockerfile
-build/env/*.env
-mysql/log/*.log
-mysql/dump.sql
+api
+build
+db/mariadb/log
+db/mariadb/dump
+docker-compose.yml
+Makefile
+.markdownlint.yml
 README.md

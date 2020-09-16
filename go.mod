@@ -3,12 +3,12 @@ module go-rest-sample
 go 1.15
 
 require (
-  github.com/gorilla/mux
-  github.com/volatiletech/sqlboiler
-  github.com/volatiletech/null/v8
-  github.com/volatiletech/sqlboiler/drivers/sqlboiler-mysql
-  github.com/golang/mock/mockgen
-  github.com/google/wire/cmd/wire
-  github.com/cosmtrek/air
-  go.uber.org/zap
+  github.com/gorilla/mux latest
+  github.com/volatiletech/sqlboiler latest
+  github.com/volatiletech/null/v8 latest
+  github.com/volatiletech/sqlboiler/drivers/sqlboiler-mysql latest
+  github.com/golang/mock/gomock latest
+  github.com/golang/mock/mockgen latest
+  github.com/google/wire/cmd/wire latest
+  go.uber.org/zap latest
 )

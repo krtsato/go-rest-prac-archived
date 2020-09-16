@@ -3,3 +3,6 @@ dev-up-all:
 
 dev-down-all:
 	docker-compose down --rmi all -v
+
+dev-prune-sys:
+	docker system prune
