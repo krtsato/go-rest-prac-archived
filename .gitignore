@@ -1,3 +1,15 @@
-/build/env/*.env
-/db/log/*.log
-/db/dump/*.sql
+# env
+/build/env
+!/build/env/.keep
+
+# db
+/db/mariadb/log
+!/db/mariadb/log/.keep
+/db/mariadb/dump
+!/db/mariadb/dump/.keep
+
+# air binary output
+/build/tmp
+!/build/tmp/.keep
+# can't control the output directory for build-error with .air.toml
+/tmp

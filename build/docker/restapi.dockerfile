@@ -12,7 +12,7 @@ RUN set -ox pipefail \
   build-base bash vim curl git \
   mariadb-client mariadb-dev \
   && rm -rf /var/cache/apk/* \
-  && curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh | sh -s \
+  && curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh | sh -s -- -b $(go env GOPATH)/bin \
   && go build -v -o /build/tmp/restapi ./cmd/restapi/main.go
 
 FROM alpine:3.12.0
@@ -20,5 +20,4 @@ FROM alpine:3.12.0
 WORKDIR /go-rest-sample
 
 COPY --from=build /bin/restapi ./restapi
-
 CMD ["/go-rest-sample/restapi"]

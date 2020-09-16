@@ -6,3 +6,12 @@ dev-down-all:
 
 dev-prune-sys:
 	docker system prune
+
+dev-logs:
+	docker-compose logs -f
+
+go-tidy:
+	go mod tidy
+
+go-clean:
+	go clean -modcache

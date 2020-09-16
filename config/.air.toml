@@ -8,24 +8,39 @@ tmp_dir = "build/tmp"
 [build]
 # Just plain old shell command. You could use `make` as well.
 cmd = "go build -o ./build/tmp/restapi ./cmd/restapi/main.go"
+
 # Binary file yields from `cmd`.
 bin = "build/tmp/restapi"
+
 # Customize binary.
-full_bin = "APP_ENV=dev APP_USER=air ./build/tmp/main"
+full_bin = "APP_ENV=dev APP_USER=air ./build/tmp/restapi"
+
 # Watch these filename extensions.
 include_ext = ["go"]
+
 # Ignore these filename extensions or directories.
-exclude_dir = [build", "db", "scripts"]
+exclude_dir = ["build", "db", "scripts"]
+
 # Watch these directories if you specified.
 include_dir = ["cmd", "internal", "pkg"]
+
 # Exclude files.
 exclude_file = []
+
 # It's not necessary to trigger build each time file changes if it's too frequent.
 delay = 1000 # ms
-# Stop to run old binary when build errors occur.
+
+# Stop running old binary when build errors occur.
 stop_on_error = true
+
+# Send Interrupt signal before killing process (windows does not support this feature)
+send_interrupt = false
+
+# Delay after sending Interrupt signal
+kill_delay = 500 # ms
+
 # This log file places in your tmp_dir.
-log = "air_errors.log"
+log = "air.log"
 
 [log]
 # Show log time
