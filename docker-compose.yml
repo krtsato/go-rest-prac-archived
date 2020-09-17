@@ -27,7 +27,7 @@ services:
       - 3306:3306
     volumes:
       - mariadb-vol:/var/lib/mysql
-      - ./config/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./config/my.cnf:/etc/mysql/conf.d/mariadb.cnf
       - ./db/mariadb/initdb.d:/docker-entrypoint-initdb.d
       - ./db/mariadb/log:/var/log
 

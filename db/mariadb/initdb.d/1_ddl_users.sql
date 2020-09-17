@@ -1,4 +1,4 @@
-create database restapi_db;
+create database if not exists restapi_db;
 use restapi_db;
 
 create table restapi_db.users(
