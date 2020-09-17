@@ -25,12 +25,9 @@ general_log_file=/var/log/general.log
 # 普遍的なログは出力しない
 general_log=0
 
-[mysqld_safe]
+[mariadb_safe]
 # PID ファイル
 pid_file=/var/run/mysqld/mysqld.pid
 
 # Socket ファイル
 socket=/run/mysqld/mysqld.sock
-
-# タイムゾーン
-timezone=Asia/Tokyo
