@@ -11,9 +11,9 @@ services:
     container_name: restapi_cont
     ports:
       - 9999:9999
-    command: air
+    command: air -c ./config/.air.toml
     volumes:
-      - .:/restapi
+      - .:/go-rest-sample
       - ./db/mariadb/dump:/var/dump
 
   mariadb:
