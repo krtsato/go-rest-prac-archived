@@ -11,7 +11,7 @@ services:
     container_name: restapi_cont
     ports:
       - 9999:9999
-    command: air -c ./config/.air.toml
+    command: air -c ./configs/.air.toml
     volumes:
       - .:/go-rest-sample
       - ./db/mariadb/dump:/var/dump
@@ -27,7 +27,7 @@ services:
       - 3306:3306
     volumes:
       - mariadb-vol:/var/lib/mysql
-      - ./config/mariadb.cnf:/etc/mysql/conf.d/mariadb.cnf
+      - ./configs/mariadb.cnf:/etc/mysql/conf.d/mariadb.cnf
       - ./db/mariadb/initdb.d:/docker-entrypoint-initdb.d
       - ./db/mariadb/log:/var/log
 
