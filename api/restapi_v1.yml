@@ -1,0 +1,56 @@
+openapi: 3.0.0
+info:
+  title: restapi_v1
+  version: '1.0'
+  description: REST API for the layered sample project
+  contact:
+    name: krtsato GitHub
+    url: 'https://github.com/krtsato/go-rest-sample'
+servers:
+  - url: 'http://localhost:9999'
+tags:
+  - name: User
+    description: ユーザ関連API
+paths:
+  /users:
+    get:
+      summary: List of users
+      tags:
+        - User
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+      operationId: get-users
+      description: return the array of users objects
+components:
+  schemas:
+    User:
+      title: User
+      type: object
+      description: User model
+      properties:
+        id:
+          type: integer
+          example: 1
+          minimum: 1
+        first_name:
+          type: string
+          minLength: 1
+          maxLength: 63
+          example: Haruhi
+        last_name:
+          type: string
+          minLength: 1
+          maxLength: 63
+          example: Suzumiya
+      required:
+        - id
+        - first_name
+        - last_name
+  securitySchemes: {}
