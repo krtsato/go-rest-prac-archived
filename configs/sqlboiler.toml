@@ -1,13 +1,13 @@
-pkgname = "dbmodel"
-output = "domain/dbmodel"
+pkgname = "userentity"
+output = "internal/domain/entity/userentity"
 add-global-variants=true
 
 [mysql]
-dbname      = "nikki_db"
-host        = "127.0.0.1"
+dbname      = "restapi_db"
+host        = "mariadb"
 port        = 3306
-user        = "root"
-pass        = "password"
+user        = "mysql_user"
+pass        = "mysql_pwd"
+sslmode     = "false"
 blacklist   = []
 whitelist   = []
-sslmode     = "false"

@@ -2,6 +2,9 @@
 /build/env
 !/build/env/.keep
 
+# config
+/configs/sqlboiler.toml
+
 # db
 /db/mariadb/log
 !/db/mariadb/log/.keep
@@ -11,5 +14,3 @@
 # air binary output
 /build/tmp
 !/build/tmp/.keep
-# can't control the output directory for build-error with .air.toml
-/tmp
