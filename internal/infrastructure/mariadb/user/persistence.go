@@ -22,14 +22,14 @@ func (up userPersistence) InsertUser(DB *sql.DB, userEntity *user.entity) error 
 	return err
 }
 
-/*
-//userIDによってユーザ情報を取得する
-func (up userPersistence) GetByUserID(DB *sql.DB, userID string) (*domain.User, error) {
-    row := DB.QueryRow("SELECT * FROM user WHERE user_id = ?", userID)
-    //row型をgolangで利用できる形にキャストする。
-    return convertToUser(row)
+// userID によってユーザ情報を取得する
+func (up userPersistence) SelectByUserID(DB *sql.DB, userID int) (*user.Entity, error) {
+	row := DB.QueryRow("SELECT * FROM user WHERE user_id = ?", userID)
+	//row型をgolangで利用できる形にキャストする。
+	return convertToUser(row)
 }
 
+/*
 //row型をuser型に紐づける
 func convertToUser(row *sql.Row) (*domain.User, error) {
     user := domain.User{}
