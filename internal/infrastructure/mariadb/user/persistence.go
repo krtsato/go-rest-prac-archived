@@ -1,28 +1,28 @@
 package user
 
-/*
 import (
+	"database/sql"
 	"go-rest-sample/domain/entity/user"
 	"go-rest-sample/domain/repository/user"
-  "database/sql"
 )
 
 type userPersistence struct{}
 
-func NewUserPersistence() repository.UserRepository {
-    return &userPersistence{}
+func NewUserPersistence() user.Repository {
+	return &userPersistence{}
 }
 
-//ユーザ登録
-func (up userPersistence) InsertUser(DB *sql.DB, userID, name, email string) error {
-    stmt, err := DB.Prepare("INSERT INTO user(user_id, name, email) VALUES(?, ?, ?)")
-    if err != nil {
-        return err
-    }
-    _, err = stmt.Exec(userID, name, email)
-    return err
+// ユーザ登録
+func (up userPersistence) InsertUser(DB *sql.DB, userEntity *user.entity) error {
+	stmt, err := DB.Prepare("INSERT INTO user(user_id, name, email) VALUES(?, ?, ?)")
+	if err != nil {
+		return err
+	}
+	_, err = stmt.Exec()
+	return err
 }
 
+/*
 //userIDによってユーザ情報を取得する
 func (up userPersistence) GetByUserID(DB *sql.DB, userID string) (*domain.User, error) {
     row := DB.QueryRow("SELECT * FROM user WHERE user_id = ?", userID)
