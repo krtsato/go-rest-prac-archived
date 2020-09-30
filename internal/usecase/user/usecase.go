@@ -23,8 +23,8 @@ func NewUserUsecase(ur ruser.Repository) Usecase {
 }
 
 func (u usecase) SelectLimitedUsers(ctx context.Context, limit int) (*euser.EntitySlice, error) {
-	// Persistence（Repository）を呼出
-	userSlice, err := u.repository.SelectLimitedUsers(ctx, 2)
+	// Repository 経由で Persistence を呼ぶ
+	userSlice, err := u.repository.SelectLimitedUsers(ctx, limit)
 	if err != nil {
 		return nil, err
 	}
