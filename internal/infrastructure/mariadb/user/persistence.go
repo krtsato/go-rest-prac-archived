@@ -2,15 +2,15 @@ package user
 
 import (
 	"context"
-	"go-rest-sample/domain/entity/user"
-	"go-rest-sample/domain/repository/user"
+	euser "go-rest-sample/internal/domain/entity/user"
+	ruser "go-rest-sample/internal/domain/repository/user"
 	"time"
 )
 
-type userPersistence struct{}
+type Persistence struct{}
 
-func NewUserPersistence() user.Repository {
-	return &userPersistence{}
+func NewUserPersistence() ruser.Repository {
+	return &Persistence{}
 }
 
 /*
@@ -45,27 +45,27 @@ func convertToUser(row *sql.Row) (*user.Entity, error) {
 }
 */
 
-func (up userPersistence) SelectLimitedUsers(ctx context.Context, limit int) (*user.EntitySlice, error) {
+func (p Persistence) SelectLimitedUsers(ctx context.Context, limit int) (*euser.EntitySlice, error) {
 	// 一旦モックデータを返却する
-	user1 := user.Entity{
+	user1 := euser.Entity{
 		ID:        1,
 		ProfileID: 1,
 		Mail:      "hoge@email.com",
 		Phone:     "00011112222",
-		CreatedAt: time.Now(),
-		UpdatedAt: time.Now(),
-		DeletedAt: nil,
+		CreatedAt: &time.Time{},
+		UpdatedAt: &time.Time{},
+		DeletedAt: &time.Time{},
 	}
 
-	user2 := user.Entity{
+	user2 := euser.Entity{
 		ID:        2,
 		ProfileID: 2,
 		Mail:      "fuga@email.com",
 		Phone:     "33344445555",
-		CreatedAt: time.Now(),
-		UpdatedAt: time.Now(),
-		DeletedAt: nil,
+		CreatedAt: &time.Time{},
+		UpdatedAt: &time.Time{},
+		DeletedAt: &time.Time{},
 	}
 
-	return *user.EntitySlice{user1, user2}, nil
+	return &euser.EntitySlice{&user1, &user2}, nil
 }

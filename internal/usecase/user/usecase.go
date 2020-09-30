@@ -3,28 +3,28 @@ package user
 import (
 	"context"
 
-	"go-rest-sample/domain/entity/user"
-	"go-rest-sample/domain/repository/user"
+	euser "go-rest-sample/internal/domain/entity/user"
+	ruser "go-rest-sample/internal/domain/repository/user"
 )
 
-type UserUsecase interface {
-	SelectLimitedUsers(ctx context.Context, limit int) (*user.EntitySlice, error)
+type Usecase interface {
+	SelectLimitedUsers(ctx context.Context, limit int) (*euser.EntitySlice, error)
 }
 
-type userUsecase struct {
+type usecase struct {
 	// Repository や DomainService の手続き
-	repository user.Repository
+	repository ruser.Repository
 }
 
-func NewUserUsecase(ur user.Repository) UserUsecase {
-	return &userUsecase{
+func NewUserUsecase(ur ruser.Repository) Usecase {
+	return &usecase{
 		repository: ur,
 	}
 }
 
-func (uu userUsecase) SelectLimitedUsers(ctx context.Context) (user.EntitySlice, error) {
+func (u usecase) SelectLimitedUsers(ctx context.Context, limit int) (*euser.EntitySlice, error) {
 	// Persistence（Repository）を呼出
-	userSlice, err := uu.repository.SelectLimitedUsers(ctx, 2)
+	userSlice, err := u.repository.SelectLimitedUsers(ctx, 2)
 	if err != nil {
 		return nil, err
 	}
