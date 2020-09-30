@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	puser "go-rest-sample/internal/infrastructure/mariadb/user"
-	huser "go-rest-sample/internal/interface/handler/user"
+	huser "go-rest-sample/internal/interfaces/handler/rest/user"
 	uuser "go-rest-sample/internal/usecase/user"
 
 	"github.com/julienschmidt/httprouter" /// Todo: gorilla/mux に変更
