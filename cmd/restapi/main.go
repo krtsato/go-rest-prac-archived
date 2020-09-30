@@ -2,8 +2,29 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"net/http"
+
+	puser "go-rest-sample/internal/infrastructure/mariadb/user"
+	huser "go-rest-sample/internal/interface/handler/user"
+	uuser "go-rest-sample/internal/usecase/user"
+
+	"github.com/julienschmidt/httprouter" /// Todo: gorilla/mux に変更
 )
 
 func main() {
-	fmt.Println("Hello, World!")
+	// Todo: Wire で DI
+	userPersistence := puser.NewUserPersistence()
+	userUseCase := uuser.NewUserUsecase(userPersistence)
+	userHandler := huser.NewUserHandler(userUseCase)
+
+	// ルーティングの設定
+	router := httprouter.New()
+	router.GET("/api/v1/users", userHandler.Index)
+
+	// サーバ起動
+	fmt.Println("=====================================")
+	fmt.Println("Server Start >> http://localhost:9999")
+	fmt.Println("=====================================")
+	log.Fatal(http.ListenAndServe(":9999", router))
 }

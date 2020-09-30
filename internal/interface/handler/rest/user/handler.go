@@ -26,8 +26,10 @@ func NewUserHandler(uu uuser.Usecase) Handler {
 
 // UserIndex : GET /users -> User データ一覧を返す
 func (h handler) Index(w http.ResponseWriter, r *http.Request, pr httprouter.Params) {
+	// Todo: request, response パッケージを切り出す
+
 	// request : 本 API のリクエストパラメータ
-	//  -> こんな感じでリクエストも受け取れますが、今回は使いません
+	//  -> こんな感じでリクエストも受け取れますが、今回は使わない
 	type request struct {
 		Begin uint `query:"begin"`
 		Limit uint `query:"limit"`
