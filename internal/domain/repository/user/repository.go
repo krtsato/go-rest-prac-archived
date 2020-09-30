@@ -8,4 +8,5 @@ import (
 type Repository interface {
 	InsertUser(ctx context.Context, userEntity *user.Entity) (*user.Entity, error)
 	SelectByUserID(ctx context.Context, userID int) (*user.Entity, error)
+	SelectLimitedUsers(ctx context.Context, limit int) (*user.Entity, error)
 }

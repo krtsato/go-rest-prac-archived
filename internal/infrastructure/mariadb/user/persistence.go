@@ -45,7 +45,7 @@ func convertToUser(row *sql.Row) (*user.Entity, error) {
 }
 */
 
-func (up userPersistence) SelectAllUser(ctx context.Context, limit int) (*user.EntitySlice, error) {
+func (up userPersistence) SelectLimitedUsers(ctx context.Context, limit int) (*user.EntitySlice, error) {
 	// 一旦モックデータを返却する
 	user1 := user.Entity{
 		ID:        1,
