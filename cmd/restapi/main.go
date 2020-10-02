@@ -12,7 +12,7 @@ import (
 	"github.com/julienschmidt/httprouter" /// Todo: gorilla/mux に変更
 )
 
-func main() {
+func run() error {
 	// Todo: Wire で DI
 	userPersistence := puser.NewUserPersistence()
 	userUseCase := uuser.NewUserUsecase(userPersistence)
@@ -27,4 +27,12 @@ func main() {
 	fmt.Println("Server Start >> http://localhost:9999")
 	fmt.Println("=====================================")
 	log.Fatal(http.ListenAndServe(":9999", router))
+
+	return nil
+}
+
+func main() {
+	if err := run(); err != nil {
+		log.Fatalln(err)
+	}
 }
