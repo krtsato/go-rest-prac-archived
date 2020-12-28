@@ -9,7 +9,7 @@ import (
 	huser "go-rest-sample/internal/interfaces/handler/rest/user"
 	uuser "go-rest-sample/internal/usecase/user"
 
-	"github.com/julienschmidt/httprouter" /// Todo: gorilla/mux に変更
+	"github.com/julienschmidt/httprouter" // Todo: gorilla/mux に変更
 )
 
 func run() error {
